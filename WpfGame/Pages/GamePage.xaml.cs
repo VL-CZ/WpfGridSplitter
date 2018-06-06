@@ -12,16 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfGame.Pages;
 
 namespace WpfGame
 {
     /// <summary>
-    /// Interaction logic for GameUC.xaml
+    /// Interaction logic for Page1.xaml
     /// </summary>
-    public partial class GameUC : UserControl
+    public partial class GamePage : Page
     {
         public double PixelsPerMove { get; private set; }
-        public GameUC(double ppm)
+        public GamePage(double ppm)
         {
             InitializeComponent();
             PixelsPerMove = ppm;
@@ -32,7 +33,7 @@ namespace WpfGame
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             Window window = Window.GetWindow(this);
             window.KeyUp += HandleKeyPress;
@@ -46,6 +47,7 @@ namespace WpfGame
         private void HandleKeyPress(object sender, KeyEventArgs e)
         {
             double width = LeftColumnGrid.ActualWidth;
+            string winner = "";
 
             if (e.Key == Key.Left)
                 width = LeftColumnGrid.ActualWidth - PixelsPerMove;
@@ -54,17 +56,25 @@ namespace WpfGame
 
             if (width <= 0)
             {
-                MessageBox.Show("Red");
                 width = 0;
+                winner = "Red";
             }
             else if (width >= GameGrid.ActualWidth)
             {
-                MessageBox.Show("Blue");
                 width = GameGrid.ActualWidth;
+                winner = "Blue";
             }
 
             LeftColumnGrid.Width = new GridLength(width);
 
+            if (winner != "")
+            {
+                Window window = Window.GetWindow(this);
+                window.KeyUp -= HandleKeyPress;
+
+                this.NavigationService.Navigate(new EndPage(winner));
+                
+            }
         }
     }
 }

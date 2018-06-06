@@ -12,19 +12,28 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WpfGame.Pages;
 
-namespace WpfGame
+namespace WpfGame.Pages
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for EndPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class EndPage : Page
     {
-        public MainWindow()
+        public EndPage(string winner)
         {
             InitializeComponent();
-            GameFrame.NavigationService.Navigate(new StartPage());
+            WinnerTextBlock.Text = winner;
+        }
+
+        private void RestartButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new StartPage());
+        }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            Window.GetWindow(this).Close();
         }
     }
 }

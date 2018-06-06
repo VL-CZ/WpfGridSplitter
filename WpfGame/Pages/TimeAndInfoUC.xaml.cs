@@ -12,19 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WpfGame.Pages;
 
-namespace WpfGame
+namespace WpfGame.Pages
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for TimeAndInfoUC.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class TimeAndInfoUC : UserControl
     {
-        public MainWindow()
+        public TimeAndInfoUC()
         {
             InitializeComponent();
-            GameFrame.NavigationService.Navigate(new StartPage());
         }
     }
 }
