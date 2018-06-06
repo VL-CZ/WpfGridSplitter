@@ -23,6 +23,8 @@ namespace WpfGame
         public MainWindow()
         {
             InitializeComponent();
+            GameUC gameUC = new GameUC(20);
+            GameFrame.NavigationService.Navigate(gameUC);
         }
     }
 }
